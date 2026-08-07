@@ -32,16 +32,24 @@ npx tsc --noEmit  # chequeo de tipos
 ```
 src/
   app/
-    page.tsx              landing
-    nosotros/             quiénes somos
-    agenda/               formulario de reserva
-    schools/              FisioKids Schools (B2B)
+    (site)/               sitio público (navbar verde + footer + WhatsApp)
+      page.tsx            landing
+      nosotros/           quiénes somos
+      agenda/             formulario de reserva
+    schools/              FisioKids Schools: sitio aparte con su propio layout
+      page.tsx            landing de la plataforma
+      login/ registro/    acceso de apoderados (maqueta sin backend)
+      panel/              informes, blog, tips, juegos, pagos
   components/
     Navbar, Footer, Logo, Turtle (mascota Tuki), WhatsAppButton
-    sections/             bloques de la landing
-  data/                   terapias y novedades (contenido editable)
+    sections/             bloques de la landing pública
+    schools/              header, sidebar, mockup y formularios de Schools
+  data/                   terapias, novedades y datos de Schools (editable)
   lib/site.ts             datos de contacto y navegación
 ```
+
+Las dos partes viven en el mismo proyecto pero no comparten layout: el sitio público
+usa el route group `(site)` y FisioKids Schools tiene el suyo en `src/app/schools`.
 
 Para cambiar teléfono, dirección, correo o WhatsApp: `src/lib/site.ts`.
 Para editar terapias o novedades: `src/data/`.

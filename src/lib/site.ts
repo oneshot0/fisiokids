@@ -15,5 +15,9 @@ export const nav = [
   { href: "/", label: "Inicio" },
   { href: "/nosotros", label: "Nosotros" },
   { href: "/agenda", label: "Agenda una cita" },
-  { href: "/schools", label: "FisioKids Schools" },
 ] as const;
+
+export const schoolsNavItem = {
+  href: "/schools",
+  label: "FisioKids Schools",
+} as const;

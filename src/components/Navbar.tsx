@@ -4,7 +4,40 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Logo } from "./Logo";
-import { nav } from "@/lib/site";
+import { nav, schoolsNavItem } from "@/lib/site";
+
+function SchoolsLink({
+  className = "",
+  onClick,
+}: {
+  className?: string;
+  onClick?: () => void;
+}) {
+  return (
+    <Link
+      href={schoolsNavItem.href}
+      onClick={onClick}
+      className={`group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand-700 to-brand-500 px-5 py-2.5 text-sm font-bold text-white shadow-lg shadow-brand-600/30 ring-1 ring-brand-700/20 transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-brand-600/40 ${className}`}
+    >
+      <svg viewBox="0 0 24 24" className="size-4" fill="currentColor" aria-hidden="true">
+        <path d="M12 3 1 8l11 5 9-4.09V17h2V8L12 3ZM5 13.18V17c0 1.66 3.13 3 7 3s7-1.34 7-3v-3.82l-7 3.18-7-3.18Z" />
+      </svg>
+      {schoolsNavItem.label}
+      <svg
+        viewBox="0 0 24 24"
+        className="size-4 transition-transform group-hover:translate-x-0.5"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M5 12h13m-5-6 6 6-6 6" />
+      </svg>
+    </Link>
+  );
+}
 
 export function Navbar() {
   const pathname = usePathname();
@@ -40,16 +73,10 @@ export function Navbar() {
               </li>
             );
           })}
+          <li className="ml-2">
+            <SchoolsLink />
+          </li>
         </ul>
-
-        <div className="hidden md:block">
-          <Link
-            href="/agenda"
-            className="rounded-full bg-brand-600 px-5 py-2.5 text-sm font-bold text-white shadow-sm transition-colors hover:bg-brand-700"
-          >
-            Reservar
-          </Link>
-        </div>
 
         <button
           type="button"
@@ -83,14 +110,8 @@ export function Navbar() {
                 </Link>
               </li>
             ))}
-            <li>
-              <Link
-                href="/agenda"
-                onClick={() => setOpen(false)}
-                className="mt-1 block rounded-xl bg-brand-600 px-3 py-2.5 text-center font-bold text-white"
-              >
-                Reservar
-              </Link>
+            <li className="mt-1">
+              <SchoolsLink className="w-full justify-center" onClick={() => setOpen(false)} />
             </li>
           </ul>
         </div>

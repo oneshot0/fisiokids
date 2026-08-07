@@ -27,8 +27,8 @@ Marca las casillas conforme avancemos.
 - [x] Testimonios de familias
 - [x] Contacto + horarios + espacio para el mapa
 - [x] Página Nosotros (historia, valores, equipo)
-- [x] Página FisioKids Schools (landing B2B)
 - [x] Página Agenda con formulario que envía por WhatsApp
+- [x] FisioKids Schools destacado en el navbar (botón con sombra y gradiente)
 
 **Pendiente de contenido real** (lo necesito de ti):
 - [ ] Logo oficial en SVG/PNG
@@ -36,6 +36,22 @@ Marca las casillas conforme avancemos.
 - [ ] Lista definitiva de terapias, duración y precios
 - [ ] Dirección exacta, teléfono, WhatsApp y correo reales
 - [ ] Textos de "Nosotros" y testimonios reales
+
+## Fase 1.5 — FisioKids Schools: maqueta navegable ✅
+
+Sitio aparte con identidad propia (gris/blanco/verde, animaciones), en `/schools`.
+Layout independiente del sitio público: no comparte navbar ni footer.
+
+- [x] Landing de Schools con mockup animado de la app
+- [x] `/schools/login` y `/schools/registro` (registro en 3 pasos con código de colegio)
+- [x] Panel con sidebar oscuro: Inicio, Informes, Blog, Tips, Juegos, Pagos
+- [x] Dashboard con métricas, últimos reportes y avance por objetivo
+- [x] Animaciones reutilizables (`fade-up`, `float`, `pop-in`, `draw-ring`) con
+      soporte de `prefers-reduced-motion`
+
+**Es una maqueta sin backend**: cualquier credencial entra al panel y los datos son
+de ejemplo (`src/data/schools.ts`). La autenticación real llega en la Fase 4, los
+juegos jugables en la Fase 8.
 
 ## Fase 2 — Contenido y pulido
 
@@ -101,6 +117,8 @@ Costo estimado inicial: **USD 60–120/mes**.
 ## Fase 8 — FisioKids Schools
 
 - [ ] Modelo de datos de colegios, alumnos y tamizajes
+- [ ] Conectar la maqueta de la Fase 1.5 a datos reales
+- [ ] Juegos jugables (no maquetas)
 - [ ] Portal para colegios (rol `SCHOOL`)
 - [ ] Campañas de tamizaje y captura de resultados en tablet
 - [ ] Informes agregados por grado y por institución

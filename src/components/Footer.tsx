@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Logo } from "./Logo";
-import { nav, site } from "@/lib/site";
+import { nav, schoolsNavItem, site } from "@/lib/site";
 
 export function Footer() {
   return (
@@ -19,7 +19,7 @@ export function Footer() {
             Navegación
           </h2>
           <ul className="mt-4 space-y-2 text-sm text-brand-700">
-            {nav.map((item) => (
+            {[...nav, schoolsNavItem].map((item) => (
               <li key={item.href}>
                 <Link href={item.href} className="hover:text-brand-900 hover:underline">
                   {item.label}
