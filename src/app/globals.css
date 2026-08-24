@@ -15,7 +15,27 @@
   --color-sand-50: #fefdf8;
   --color-sand-100: #fdf6e3;
 
+  /* Pastel de apoyo para el panel de Schools (acompañan al verde de marca) */
+  --color-cream-50: #fffdf7;
+  --color-cream-100: #fdf6e9;
+  --color-cream-200: #f7ecd8;
+  --color-peach-100: #fde8dc;
+  --color-peach-200: #fbd5c1;
+  --color-peach-500: #f2a27a;
+  --color-peach-700: #b4643c;
+  --color-butter-100: #fdf1cf;
+  --color-butter-200: #f9e3a8;
+  --color-butter-600: #b78a1f;
+  --color-sky-100: #dfeaf7;
+  --color-sky-200: #c4d8ee;
+  --color-sky-700: #43648c;
+  --color-blush-100: #fbdfe2;
+  --color-blush-600: #bc5f6b;
+
   --font-sans: var(--font-nunito), ui-sans-serif, system-ui, sans-serif;
+
+  --shadow-soft: 0 12px 30px -18px rgba(20, 83, 45, 0.35);
+  --shadow-card: 0 18px 40px -28px rgba(20, 83, 45, 0.45);
 }
 
 html {
@@ -112,6 +132,121 @@ body {
 .animate-grow-bar {
   transform-origin: bottom;
   animation: grow-bar 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.animate-slide-in-left {
+  animation: slide-in-left 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* ---- Panel de Schools: sidebar retráctil ---- */
+
+.panel-shell {
+  --panel-sidebar-width: 17rem;
+  --panel-transition: 350ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.panel-shell[data-collapsed="true"] {
+  --panel-sidebar-width: 5.5rem;
+}
+
+.panel-sidebar {
+  width: var(--panel-sidebar-width);
+  transition:
+    width var(--panel-transition),
+    transform var(--panel-transition);
+}
+
+/* En móvil el sidebar se desliza por encima del contenido */
+@media (width < 64rem) {
+  .panel-sidebar {
+    width: 17rem;
+    transform: translateX(-100%);
+  }
+
+  .panel-shell[data-mobile-open="true"] .panel-sidebar {
+    transform: none;
+  }
+}
+
+.panel-main {
+  transition: padding-inline-start var(--panel-transition);
+}
+
+@media (width >= 64rem) {
+  .panel-main {
+    padding-inline-start: var(--panel-sidebar-width);
+  }
+}
+
+/* Las etiquetas se repliegan al colapsar, sin saltos de layout */
+.panel-label {
+  max-width: 12rem;
+  overflow: hidden;
+  white-space: nowrap;
+  transition:
+    max-width var(--panel-transition),
+    opacity 180ms ease-out;
+}
+
+@media (width >= 64rem) {
+  .panel-shell[data-collapsed="true"] .panel-label {
+    max-width: 0;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .panel-shell[data-collapsed="true"] .panel-hide-collapsed {
+    display: none;
+  }
+}
+
+/* Tooltip para el estado colapsado (solo escritorio) */
+.panel-tooltip {
+  opacity: 0;
+  transform: translateX(-6px) translateY(-50%);
+  transition:
+    opacity 180ms ease-out,
+    transform 180ms ease-out;
+}
+
+@media (width >= 64rem) {
+  .panel-shell[data-collapsed="true"] .panel-nav-item:hover .panel-tooltip,
+  .panel-shell[data-collapsed="true"] .panel-nav-item:focus-visible .panel-tooltip {
+    opacity: 1;
+    transform: translateX(0) translateY(-50%);
+  }
+}
+
+/* Hamburguesa de 3 líneas que se transforma en X */
+.panel-burger-line {
+  transform-origin: center;
+  transition:
+    transform 300ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 200ms ease-out;
+}
+
+[data-open="true"] .panel-burger-line:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+
+[data-open="true"] .panel-burger-line:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0.2);
+}
+
+[data-open="true"] .panel-burger-line:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
 }
 
 @media (prefers-reduced-motion: reduce) {

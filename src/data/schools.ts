@@ -1,3 +1,42 @@
+export const child = {
+  firstName: "Mateo",
+  parentFirstName: "Ana",
+  parentName: "Ana Pérez",
+  parentInitials: "AP",
+  school: "Colegio San Marcos",
+};
+
+export type WeekDay = {
+  day: string;
+  minutes: number;
+  tone: "mint" | "peach" | "butter" | "sky" | "blush";
+};
+
+/** Minutos de terapia y juegos por día de la semana (maqueta). */
+export const weekActivity: WeekDay[] = [
+  { day: "Lun", minutes: 45, tone: "mint" },
+  { day: "Mar", minutes: 30, tone: "butter" },
+  { day: "Mié", minutes: 50, tone: "peach" },
+  { day: "Jue", minutes: 20, tone: "sky" },
+  { day: "Vie", minutes: 45, tone: "mint" },
+  { day: "Sáb", minutes: 15, tone: "blush" },
+  { day: "Dom", minutes: 10, tone: "butter" },
+];
+
+export type AreaShare = {
+  area: string;
+  percent: number;
+  tone: "mint" | "peach" | "butter" | "sky" | "blush";
+};
+
+/** Distribución del tiempo de trabajo por área terapéutica (maqueta). */
+export const areaShares: AreaShare[] = [
+  { area: "Lenguaje", percent: 40, tone: "mint" },
+  { area: "Motora", percent: 25, tone: "peach" },
+  { area: "Sensorial", percent: 20, tone: "butter" },
+  { area: "Autonomía", percent: 15, tone: "sky" },
+];
+
 export type PanelSection = {
   href: string;
   label: string;
