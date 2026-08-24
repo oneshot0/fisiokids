@@ -27,11 +27,11 @@ export default function PagosPage() {
         subtitle="Estado de cuenta, comprobantes y pago en línea."
       />
 
-      <section className="animate-fade-up flex flex-wrap items-center justify-between gap-6 rounded-3xl bg-slate-900 p-8 text-white">
+      <section className="animate-fade-up flex flex-wrap items-center justify-between gap-6 rounded-3xl bg-brand-800 p-8 text-white">
         <div>
-          <p className="text-sm font-semibold text-slate-400">Saldo pendiente</p>
+          <p className="text-sm font-semibold text-white/70">Saldo pendiente</p>
           <p className="mt-1 text-4xl font-extrabold">{currency.format(pending)}</p>
-          <p className="mt-1 text-sm text-slate-400">Vence el 5 de febrero</p>
+          <p className="mt-1 text-sm text-white/70">Vence el 5 de febrero</p>
         </div>
         <button
           type="button"
@@ -41,12 +41,12 @@ export default function PagosPage() {
         </button>
       </section>
 
-      <section className="animate-fade-up mt-8 overflow-hidden rounded-3xl bg-white ring-1 ring-slate-200 [animation-delay:0.1s]">
-        <h2 className="border-b border-slate-200 px-7 py-5 text-lg font-extrabold text-slate-900">
+      <section className="animate-fade-up mt-8 overflow-hidden rounded-3xl bg-white ring-1 ring-cream-200 [animation-delay:0.1s]">
+        <h2 className="border-b border-cream-200 px-7 py-5 text-lg font-extrabold text-brand-900">
           Historial
         </h2>
         <table className="w-full text-left text-sm">
-          <thead className="bg-slate-50 text-xs uppercase tracking-wide text-slate-500">
+          <thead className="bg-cream-50 text-xs uppercase tracking-wide text-brand-900/50">
             <tr>
               <th scope="col" className="px-7 py-3 font-bold">Comprobante</th>
               <th scope="col" className="px-4 py-3 font-bold">Concepto</th>
@@ -54,12 +54,12 @@ export default function PagosPage() {
               <th scope="col" className="px-7 py-3 font-bold">Estado</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-100">
+          <tbody className="divide-y divide-cream-200">
             {invoices.map((inv) => (
-              <tr key={inv.id} className="transition-colors hover:bg-slate-50">
-                <td className="px-7 py-4 font-bold text-slate-900">{inv.id}</td>
-                <td className="px-4 py-4 text-slate-600">{inv.concept}</td>
-                <td className="whitespace-nowrap px-4 py-4 font-semibold text-slate-900">
+              <tr key={inv.id} className="transition-colors hover:bg-cream-50">
+                <td className="px-7 py-4 font-bold text-brand-900">{inv.id}</td>
+                <td className="px-4 py-4 text-brand-900/60">{inv.concept}</td>
+                <td className="whitespace-nowrap px-4 py-4 font-semibold text-brand-900">
                   {currency.format(inv.amount)}
                 </td>
                 <td className="px-7 py-4">
@@ -75,7 +75,7 @@ export default function PagosPage() {
         </table>
       </section>
 
-      <p className="mt-8 rounded-2xl bg-white p-6 text-center text-sm text-slate-500 ring-1 ring-slate-200">
+      <p className="mt-8 rounded-2xl bg-white p-6 text-center text-sm text-brand-900/50 ring-1 ring-cream-200">
         El pago en línea se integrará con Culqi o Izipay en la Fase 5.
       </p>
     </>

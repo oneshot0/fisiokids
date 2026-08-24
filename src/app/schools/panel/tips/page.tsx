@@ -23,7 +23,7 @@ export default function TipsPage() {
         {tips.map((t, i) => (
           <li
             key={t.title}
-            className="animate-fade-up flex flex-col rounded-3xl bg-white p-7 ring-1 ring-slate-200 transition-all hover:-translate-y-1 hover:shadow-xl hover:ring-brand-200"
+            className="animate-fade-up flex flex-col rounded-3xl bg-white p-7 ring-1 ring-cream-200 transition-all hover:-translate-y-1 hover:shadow-xl hover:ring-brand-200"
             style={{ animationDelay: `${i * 0.06}s` }}
           >
             <div className="flex items-center justify-between gap-3">
@@ -32,13 +32,13 @@ export default function TipsPage() {
               >
                 {t.area}
               </span>
-              <span className="text-xs font-bold text-slate-500">{t.minutes} min</span>
+              <span className="text-xs font-bold text-brand-900/50">{t.minutes} min</span>
             </div>
-            <h2 className="mt-4 text-lg font-bold text-slate-900">{t.title}</h2>
-            <p className="mt-2 grow text-slate-600">{t.text}</p>
+            <h2 className="mt-4 text-lg font-bold text-brand-900">{t.title}</h2>
+            <p className="mt-2 grow text-brand-900/60">{t.text}</p>
             <button
               type="button"
-              className="mt-5 rounded-full bg-slate-100 px-5 py-2.5 text-sm font-bold text-slate-700 transition-colors hover:bg-brand-600 hover:text-white"
+              className="mt-5 rounded-full bg-cream-100 px-5 py-2.5 text-sm font-bold text-brand-900/70 transition-colors hover:bg-brand-600 hover:text-white"
             >
               Marcar como hecho
             </button>
