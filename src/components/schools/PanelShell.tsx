@@ -50,7 +50,7 @@ export function PanelShell({ children }: Readonly<{ children: React.ReactNode }>
     >
       <script
         dangerouslySetInnerHTML={{
-          __html: `if (localStorage.getItem("${STORAGE_KEY}") === "true") document.currentScript?.parentElement?.setAttribute("data-collapsed", "true");`,
+          __html: `try { if (localStorage.getItem("${STORAGE_KEY}") === "true") document.currentScript?.parentElement?.setAttribute("data-collapsed", "true"); } catch {}`,
         }}
       />
       <PanelSidebar collapsed={collapsed} onClose={closeMobile} />
