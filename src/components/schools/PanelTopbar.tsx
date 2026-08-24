@@ -4,7 +4,7 @@ import { child } from "@/data/schools";
 
 export function PanelTopbar({ burger }: { burger: React.ReactNode }) {
   return (
-    <div className="sticky top-0 z-20 border-b border-cream-200 bg-cream-100/85 backdrop-blur">
+    <div className="sticky top-0 z-50 border-b border-cream-200 bg-cream-100/85 backdrop-blur lg:z-20">
       <div className="mx-auto flex max-w-6xl items-center gap-3 px-4 py-4 sm:px-8">
         {burger}
 

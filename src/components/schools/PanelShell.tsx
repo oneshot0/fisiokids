@@ -8,12 +8,12 @@ import { PanelTopbar } from "./PanelTopbar";
 const STORAGE_KEY = "fisiokids:panel-sidebar-collapsed";
 
 export function PanelShell({ children }: Readonly<{ children: React.ReactNode }>) {
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(
+    () =>
+      typeof document !== "undefined" &&
+      document.querySelector<HTMLElement>(".panel-shell")?.dataset.collapsed === "true",
+  );
   const [mobileOpen, setMobileOpen] = useState(false);
-
-  useEffect(() => {
-    setCollapsed(window.localStorage.getItem(STORAGE_KEY) === "true");
-  }, []);
 
   const toggle = useCallback(() => {
     const desktop = window.matchMedia("(min-width: 64rem)").matches;
@@ -48,6 +48,11 @@ export function PanelShell({ children }: Readonly<{ children: React.ReactNode }>
       data-collapsed={collapsed}
       data-mobile-open={mobileOpen}
     >
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `if (localStorage.getItem("${STORAGE_KEY}") === "true") document.currentScript?.parentElement?.setAttribute("data-collapsed", "true");`,
+        }}
+      />
       <PanelSidebar collapsed={collapsed} onClose={closeMobile} />
 
       {mobileOpen && (
