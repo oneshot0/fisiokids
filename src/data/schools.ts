@@ -1,3 +1,5 @@
+import type { PanelConfig } from "@/components/schools/PanelShell";
+
 export const child = {
   firstName: "Mateo",
   parentFirstName: "Ana",
@@ -46,7 +48,10 @@ export type PanelSection = {
     | "tips"
     | "games"
     | "payments"
-    | "reports";
+    | "reports"
+    | "users"
+    | "children"
+    | "school";
   description: string;
 };
 
@@ -88,6 +93,30 @@ export const panelSections: PanelSection[] = [
     description: "Estado de cuenta y comprobantes",
   },
 ];
+
+export const parentPanelConfig: PanelConfig = {
+  navId: "panel-nav",
+  sections: panelSections,
+  homeHref: "/schools/panel",
+  greeting: {
+    title: "¡Hola, Ana! 👋",
+    subtitle: "Mamá de Mateo",
+    href: "/schools",
+  },
+  user: {
+    name: "Ana Pérez",
+    initials: "AP",
+    roleLabel: "Apoderada",
+  },
+  searchPlaceholder: "Buscar informes, tips o juegos...",
+  promo: {
+    emoji: "🌟",
+    title: "Plan Familia",
+    text: "Más juegos y videollamadas con el terapeuta",
+    cta: "Conocer plan",
+    href: "/schools",
+  },
+};
 
 export type BlogPost = {
   slug: string;

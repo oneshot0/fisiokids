@@ -1,8 +1,18 @@
 "use client";
 
-import { child } from "@/data/schools";
-
-export function PanelTopbar({ burger }: { burger: React.ReactNode }) {
+export function PanelTopbar({
+  burger,
+  user,
+  searchPlaceholder,
+}: {
+  burger: React.ReactNode;
+  user: {
+    name: string;
+    initials: string;
+    roleLabel: string;
+  };
+  searchPlaceholder: string;
+}) {
   return (
     <div className="sticky top-0 z-50 border-b border-cream-200 bg-cream-100/85 backdrop-blur lg:z-20">
       <div className="mx-auto flex max-w-6xl items-center gap-3 px-4 py-4 sm:px-8">
@@ -28,7 +38,7 @@ export function PanelTopbar({ burger }: { burger: React.ReactNode }) {
           <input
             type="search"
             name="q"
-            placeholder="Buscar informes, tips o juegos..."
+            placeholder={searchPlaceholder}
             aria-label="Buscar en el panel"
             className="w-full bg-transparent text-sm font-semibold text-brand-900 placeholder:font-medium placeholder:text-brand-900/40 focus:outline-none"
           />
@@ -62,13 +72,13 @@ export function PanelTopbar({ burger }: { burger: React.ReactNode }) {
               aria-hidden="true"
               className="grid size-9 place-items-center rounded-full bg-brand-100 text-sm font-extrabold text-brand-700"
             >
-              {child.parentInitials}
+              {user.initials}
             </span>
             <span className="hidden text-left sm:block">
               <span className="block text-sm font-extrabold leading-tight text-brand-900">
-                {child.parentName}
+                {user.name}
               </span>
-              <span className="block text-xs font-semibold text-brand-600">Apoderada</span>
+              <span className="block text-xs font-semibold text-brand-600">{user.roleLabel}</span>
             </span>
           </div>
         </div>

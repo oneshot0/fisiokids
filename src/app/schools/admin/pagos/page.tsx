@@ -1,0 +1,20 @@
+import type { Metadata } from "next";
+import { PanelHeader } from "@/components/schools/PanelHeader";
+import { adminSections } from "@/data/admin";
+
+const section = adminSections[4];
+
+export const metadata: Metadata = {
+  title: "Pagos",
+};
+
+export default function AdminPaymentsPage() {
+  return (
+    <>
+      <PanelHeader title={section.label} subtitle={section.description} />
+      <section className="animate-fade-up rounded-3xl bg-white p-8 text-center shadow-soft ring-1 ring-cream-200">
+        <p className="font-semibold text-brand-900/60">Módulo en construcción — paso 3</p>
+      </section>
+    </>
+  );
+}

@@ -4,10 +4,37 @@ import { useCallback, useEffect, useState } from "react";
 import { BurgerButton } from "./BurgerButton";
 import { PanelSidebar } from "./PanelSidebar";
 import { PanelTopbar } from "./PanelTopbar";
+import type { PanelSection } from "@/data/schools";
 
-const STORAGE_KEY = "fisiokids:panel-sidebar-collapsed";
+export type PanelConfig = {
+  navId: string;
+  sections: PanelSection[];
+  homeHref: string;
+  greeting: {
+    title: string;
+    subtitle: string;
+    href: string;
+  };
+  user: {
+    name: string;
+    initials: string;
+    roleLabel: string;
+  };
+  searchPlaceholder: string;
+  promo?: {
+    emoji: string;
+    title: string;
+    text: string;
+    cta: string;
+    href: string;
+  };
+};
 
-export function PanelShell({ children }: Readonly<{ children: React.ReactNode }>) {
+export function PanelShell({
+  config,
+  children,
+}: Readonly<{ config: PanelConfig; children: React.ReactNode }>) {
+  const storageKey = `fisiokids:${config.navId}-collapsed`;
   const [collapsed, setCollapsed] = useState(
     () =>
       typeof document !== "undefined" &&
@@ -15,19 +42,25 @@ export function PanelShell({ children }: Readonly<{ children: React.ReactNode }>
   );
   const [mobileOpen, setMobileOpen] = useState(false);
 
+  useEffect(() => {
+    setCollapsed(
+      document.querySelector<HTMLElement>(".panel-shell")?.dataset.collapsed === "true",
+    );
+  }, []);
+
   const toggle = useCallback(() => {
     const desktop = window.matchMedia("(min-width: 64rem)").matches;
 
     if (desktop) {
       setCollapsed((value) => {
-        window.localStorage.setItem(STORAGE_KEY, String(!value));
+        window.localStorage.setItem(storageKey, String(!value));
         return !value;
       });
       return;
     }
 
     setMobileOpen((value) => !value);
-  }, []);
+  }, [storageKey]);
 
   const closeMobile = useCallback(() => setMobileOpen(false), []);
 
@@ -50,10 +83,18 @@ export function PanelShell({ children }: Readonly<{ children: React.ReactNode }>
     >
       <script
         dangerouslySetInnerHTML={{
-          __html: `try { if (localStorage.getItem("${STORAGE_KEY}") === "true") document.currentScript?.parentElement?.setAttribute("data-collapsed", "true"); } catch {}`,
+          __html: `try { if (localStorage.getItem("${storageKey}") === "true") document.currentScript?.parentElement?.setAttribute("data-collapsed", "true"); } catch {}`,
         }}
       />
-      <PanelSidebar collapsed={collapsed} onClose={closeMobile} />
+      <PanelSidebar
+        collapsed={collapsed}
+        onClose={closeMobile}
+        navId={config.navId}
+        sections={config.sections}
+        homeHref={config.homeHref}
+        greeting={config.greeting}
+        promo={config.promo}
+      />
 
       {mobileOpen && (
         <button
@@ -71,10 +112,12 @@ export function PanelShell({ children }: Readonly<{ children: React.ReactNode }>
               expanded={mobileOpen || !collapsed}
               showClose={mobileOpen}
               onClick={toggle}
-              controls="panel-nav"
+              controls={config.navId}
               label={mobileOpen || !collapsed ? "Contraer menú" : "Desplegar menú"}
             />
           }
+          user={config.user}
+          searchPlaceholder={config.searchPlaceholder}
         />
         <main className="mx-auto max-w-6xl px-4 pb-16 pt-6 sm:px-8">{children}</main>
       </div>
