@@ -69,7 +69,7 @@ export function AuthIntro({
 
   const assembling = phase === "assemble";
   const enteringClass = assembling ? "animate-fade-up" : "";
-  const rootClass = `auth-intro-root relative grid min-h-screen overflow-hidden ${
+  const rootClass = `auth-intro-root relative grid min-h-screen overflow-hidden lg:grid-cols-2 ${
     phase === "pending" ? "invisible" : ""
   }`;
 
