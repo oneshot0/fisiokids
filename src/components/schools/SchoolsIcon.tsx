@@ -9,6 +9,11 @@ const paths: Record<PanelSection["icon"], string> = {
   payments: "M3 8h18M3 8a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8Zm4 7h4",
   reports:
     "M7 3h7l4 4v14H7V3Zm7 0v4h4M10 12h5M10 16h5",
+  users:
+    "M16 20v-1a4 4 0 0 0-8 0v1M12 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm5-4a2.5 2.5 0 0 1 0 5m1 8v-1a3.5 3.5 0 0 0-2-3.2",
+  children:
+    "M8 20v-1a3 3 0 0 1 6 0v1M11 15a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Zm6 5v-1a3 3 0 0 0-2.2-2.9M17 14a2 2 0 1 0 0-4",
+  school: "M3 10 12 4l9 6M5 11v9h14v-9M9 20v-5h6v5",
 };
 
 export function SchoolsIcon({

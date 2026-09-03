@@ -4,20 +4,40 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Turtle } from "../Turtle";
 import { SchoolsIcon } from "./SchoolsIcon";
-import { child, panelSections } from "@/data/schools";
+import type { PanelSection } from "@/data/schools";
 
 export function PanelSidebar({
   collapsed,
   onClose,
+  navId,
+  sections,
+  homeHref,
+  greeting,
+  promo,
 }: {
   collapsed: boolean;
   onClose: () => void;
+  navId: string;
+  sections: PanelSection[];
+  homeHref: string;
+  greeting: {
+    title: string;
+    subtitle: string;
+    href: string;
+  };
+  promo?: {
+    emoji: string;
+    title: string;
+    text: string;
+    cta: string;
+    href: string;
+  };
 }) {
   const pathname = usePathname();
 
   return (
     <aside
-      id="panel-nav"
+      id={navId}
       className="panel-sidebar fixed inset-y-0 left-0 z-40 flex flex-col gap-6 overflow-y-auto bg-brand-50 px-3 py-5 ring-1 ring-brand-100 lg:overflow-visible"
       aria-label="Menú del panel"
     >
@@ -41,25 +61,23 @@ export function PanelSidebar({
       </button>
 
       <Link
-        href="/schools"
+        href={greeting.href}
         className="flex flex-col items-center gap-2 rounded-3xl bg-white p-3 text-center shadow-soft ring-1 ring-brand-100 transition-transform hover:-translate-y-0.5"
       >
         <span className="grid size-14 shrink-0 place-items-center rounded-full bg-brand-100 ring-4 ring-white">
           <Turtle className="size-10" title="Tuki, la tortuga de FisioKids" />
         </span>
         <span className="panel-hide-collapsed text-sm font-extrabold text-brand-800">
-          ¡Hola, {child.parentFirstName}! 👋
-          <span className="block text-xs font-bold text-brand-500">
-            Mamá de {child.firstName}
-          </span>
+          {greeting.title}
+          <span className="block text-xs font-bold text-brand-500">{greeting.subtitle}</span>
         </span>
       </Link>
 
       <nav className="flex-1">
         <ul className="flex flex-col gap-1.5">
-          {panelSections.map((section, i) => {
+          {sections.map((section, i) => {
             const active =
-              section.href === "/schools/panel"
+              section.href === homeHref
                 ? pathname === section.href
                 : pathname.startsWith(section.href);
 
@@ -102,24 +120,24 @@ export function PanelSidebar({
         </ul>
       </nav>
 
-      <div className="rounded-3xl bg-peach-100 p-4 text-center ring-1 ring-peach-200">
-        <span aria-hidden="true" className="block text-2xl">
-          🌟
-        </span>
-        <div className="panel-hide-collapsed">
-          <p className="mt-1 text-sm font-extrabold text-peach-700">Plan Familia</p>
-          <p className="mt-1 text-xs font-semibold text-peach-700/80">
-            Más juegos y videollamadas con el terapeuta
-          </p>
-          <Link
-            href="/schools"
-            onClick={onClose}
-            className="mt-3 inline-block rounded-full bg-peach-500 px-4 py-2 text-xs font-extrabold text-white transition-transform hover:-translate-y-0.5"
-          >
-            Conocer plan
-          </Link>
+      {promo && (
+        <div className="rounded-3xl bg-peach-100 p-4 text-center ring-1 ring-peach-200">
+          <span aria-hidden="true" className="block text-2xl">
+            {promo.emoji}
+          </span>
+          <div className="panel-hide-collapsed">
+            <p className="mt-1 text-sm font-extrabold text-peach-700">{promo.title}</p>
+            <p className="mt-1 text-xs font-semibold text-peach-700/80">{promo.text}</p>
+            <Link
+              href={promo.href}
+              onClick={onClose}
+              className="mt-3 inline-block rounded-full bg-peach-500 px-4 py-2 text-xs font-extrabold text-white transition-transform hover:-translate-y-0.5"
+            >
+              {promo.cta}
+            </Link>
+          </div>
         </div>
-      </div>
+      )}
     </aside>
   );
 }
