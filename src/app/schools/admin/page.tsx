@@ -108,7 +108,7 @@ export default function AdminPage() {
         {stats.map((stat, index) => (
           <li
             key={stat.label}
-            className="animate-fade-up rounded-3xl bg-white p-5 shadow-soft ring-1 ring-cream-200 transition-transform hover:-translate-y-1"
+            className="lift-glow animate-fade-up rounded-3xl bg-white p-5 shadow-soft ring-1 ring-cream-200"
             style={{ animationDelay: `${0.06 * index}s` }}
           >
             <span className={`grid size-11 place-items-center rounded-2xl ${stat.tone}`}>
@@ -153,7 +153,7 @@ export default function AdminPage() {
             </div>
             <Link
               href="/schools/admin/incidentes"
-              className="shrink-0 text-sm font-extrabold text-brand-600 hover:text-brand-800"
+              className="lift-glow inline-block shrink-0 rounded-lg px-1 text-sm font-extrabold text-brand-600 hover:text-brand-800"
             >
               Ver todo
             </Link>
@@ -188,7 +188,7 @@ export default function AdminPage() {
                   </span>
                   <Link
                     href="/schools/admin/incidentes"
-                    className="font-extrabold text-brand-600 hover:text-brand-800"
+                    className="lift-glow inline-block rounded-lg px-1 font-extrabold text-brand-600 hover:text-brand-800"
                   >
                     Ver
                   </Link>

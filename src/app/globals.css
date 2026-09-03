@@ -149,6 +149,118 @@ body {
   animation: slide-in-left 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
+@keyframes dot-bounce {
+  0%,
+  60%,
+  100% {
+    opacity: 0.35;
+    transform: translateY(0);
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes panel-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes panel-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes seam-flash {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  35%,
+  65% {
+    opacity: 1;
+  }
+}
+
+.animate-dot-bounce {
+  animation: dot-bounce 0.9s ease-in-out infinite;
+}
+
+.animate-panel-in-left {
+  animation: panel-in-left 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-panel-in-right {
+  animation: panel-in-right 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-seam-flash {
+  animation: seam-flash 0.4s ease-out 0.5s both;
+}
+
+.lift-glow {
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    color 0.2s ease;
+}
+
+.lift-glow:hover,
+.lift-glow:focus-visible {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow:
+    0 0 0 4px var(--color-brand-100),
+    0 12px 30px -12px var(--color-brand-600);
+}
+
+.panel-nav-item.nav-grow:hover,
+.panel-nav-item.nav-grow:focus-visible {
+  box-shadow: inset 0 0 0 1px var(--color-brand-200);
+}
+
+.panel-nav-item.nav-grow {
+  transition:
+    background-color 180ms ease-out,
+    box-shadow 180ms ease-out,
+    color 180ms ease-out;
+}
+
+.nav-grow > span:first-of-type {
+  transition:
+    background-color 180ms ease-out,
+    color 180ms ease-out,
+    transform 180ms ease-out;
+}
+
+.nav-grow:hover .panel-label,
+.nav-grow:focus-visible .panel-label {
+  color: var(--color-brand-800);
+  transform: scale(1.06);
+  transform-origin: left center;
+}
+
+.nav-grow:hover > span:first-of-type,
+.nav-grow:focus-visible > span:first-of-type {
+  transform: scale(1.08);
+}
+
+.auth-intro-root[data-phase="ready"] {
+  overflow: visible;
+}
+
 /* ---- Panel de Schools: sidebar retráctil ---- */
 
 .panel-shell {
@@ -196,7 +308,9 @@ body {
   white-space: nowrap;
   transition:
     max-width var(--panel-transition),
-    opacity 180ms ease-out;
+    opacity 180ms ease-out,
+    color 180ms ease-out,
+    transform 180ms ease-out;
 }
 
 @media (width >= 64rem) {
@@ -257,5 +371,12 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  .animate-dot-bounce,
+  .animate-panel-in-left,
+  .animate-panel-in-right,
+  .animate-seam-flash {
+    animation: none !important;
   }
 }

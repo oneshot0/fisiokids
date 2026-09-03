@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Turtle } from "../Turtle";
+import { AuthIntroLink } from "./AuthIntroLink";
 
 export function SchoolsHeader() {
   return (
@@ -24,18 +25,18 @@ export function SchoolsHeader() {
           >
             Volver al centro
           </Link>
-          <Link
+          <AuthIntroLink
             href="/schools/login"
-            className="rounded-full px-4 py-2 text-sm font-bold text-slate-700 transition-colors hover:bg-slate-100"
+            className="lift-glow rounded-full px-4 py-2 text-sm font-bold text-slate-700 hover:bg-slate-100"
           >
             Ingresar
-          </Link>
-          <Link
+          </AuthIntroLink>
+          <AuthIntroLink
             href="/schools/registro"
-            className="rounded-full bg-brand-600 px-5 py-2.5 text-sm font-bold text-white shadow-lg shadow-brand-600/25 transition-all hover:-translate-y-0.5 hover:bg-brand-700"
+            className="lift-glow rounded-full bg-brand-600 px-5 py-2.5 text-sm font-bold text-white shadow-lg shadow-brand-600/25"
           >
             Crear cuenta
-          </Link>
+          </AuthIntroLink>
         </div>
       </nav>
     </header>

@@ -89,7 +89,7 @@ export function PanelSidebar({
                   aria-current={active ? "page" : undefined}
                   title={collapsed ? section.label : undefined}
                   suppressHydrationWarning
-                  className={`panel-nav-item animate-slide-in-left group flex items-center gap-3 rounded-2xl px-3 py-3 text-sm font-bold transition-colors ${
+                  className={`panel-nav-item nav-grow animate-slide-in-left group flex items-center gap-3 rounded-2xl px-3 py-3 text-sm font-bold transition-colors ${
                     active
                       ? "bg-white text-brand-700 shadow-soft ring-1 ring-brand-200"
                       : "text-brand-700/70 hover:bg-white/70 hover:text-brand-700"

@@ -119,7 +119,7 @@ export function RegisterForm() {
         )}
         <button
           type="submit"
-          className="flex-1 rounded-full bg-brand-600 px-7 py-3.5 font-bold text-white shadow-lg shadow-brand-600/25 transition-all hover:-translate-y-0.5 hover:bg-brand-700"
+          className="lift-glow flex-1 rounded-full bg-brand-600 px-7 py-3.5 font-bold text-white shadow-lg shadow-brand-600/25 hover:bg-brand-700"
         >
           {step === steps.length - 1 ? "Entrar al panel" : "Continuar"}
         </button>

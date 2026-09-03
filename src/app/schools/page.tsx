@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { SchoolsHeader } from "@/components/schools/SchoolsHeader";
+import { AuthIntroLink } from "@/components/schools/AuthIntroLink";
 import { SchoolsIcon } from "@/components/schools/SchoolsIcon";
 import { AppMockup } from "@/components/schools/AppMockup";
 import { panelSections } from "@/data/schools";
@@ -54,18 +54,18 @@ export default function SchoolsLandingPage() {
             </p>
 
             <div className="animate-fade-up mt-9 flex flex-wrap justify-center gap-3 [animation-delay:0.3s]">
-              <Link
+              <AuthIntroLink
                 href="/schools/registro"
-                className="rounded-full bg-brand-600 px-8 py-3.5 font-bold text-white shadow-xl shadow-brand-600/30 transition-all hover:-translate-y-0.5 hover:bg-brand-700"
+                className="lift-glow rounded-full bg-brand-600 px-8 py-3.5 font-bold text-white shadow-xl shadow-brand-600/30"
               >
                 Crear mi cuenta
-              </Link>
-              <Link
+              </AuthIntroLink>
+              <AuthIntroLink
                 href="/schools/login"
-                className="rounded-full border-2 border-slate-300 bg-white px-8 py-3.5 font-bold text-slate-700 transition-all hover:-translate-y-0.5 hover:border-slate-400"
+                className="lift-glow rounded-full border-2 border-slate-300 bg-white px-8 py-3.5 font-bold text-slate-700"
               >
                 Ya tengo cuenta
-              </Link>
+              </AuthIntroLink>
             </div>
           </div>
 
@@ -85,13 +85,15 @@ export default function SchoolsLandingPage() {
             {features.map((f, i) => (
               <li
                 key={f.href}
-                className="animate-fade-up group rounded-3xl border border-slate-200 bg-slate-50 p-7 transition-all hover:-translate-y-1 hover:border-brand-200 hover:bg-white hover:shadow-xl"
+                className="lift-glow animate-fade-up group rounded-3xl border border-slate-200 bg-slate-50 p-7 hover:border-brand-200 hover:bg-white"
                 style={{ animationDelay: `${i * 0.08}s` }}
               >
                 <span className="grid size-12 place-items-center rounded-2xl bg-slate-900 text-white transition-colors group-hover:bg-brand-600">
                   <SchoolsIcon icon={f.icon} className="size-6" />
                 </span>
-                <h3 className="mt-5 text-xl font-bold text-slate-900">{f.label}</h3>
+                <h3 className="mt-5 origin-left text-xl font-bold text-slate-900 transition-transform group-hover:scale-105">
+                  {f.label}
+                </h3>
                 <p className="mt-2 text-slate-600">{f.description}</p>
               </li>
             ))}
@@ -122,12 +124,12 @@ export default function SchoolsLandingPage() {
               Crea tu cuenta con el código que te entregó el colegio y vincula el perfil
               de tu peque en menos de dos minutos.
             </p>
-            <Link
+            <AuthIntroLink
               href="/schools/registro"
-              className="mt-8 inline-block rounded-full bg-brand-500 px-8 py-3.5 font-bold text-white shadow-xl shadow-brand-500/30 transition-all hover:-translate-y-0.5 hover:bg-brand-400"
+              className="lift-glow mt-8 inline-block rounded-full bg-brand-500 px-8 py-3.5 font-bold text-white shadow-xl shadow-brand-500/30"
             >
               Crear mi cuenta
-            </Link>
+            </AuthIntroLink>
           </div>
         </div>
       </section>
