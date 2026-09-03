@@ -76,7 +76,7 @@ export function LoginForm() {
       <button
         type="submit"
         disabled={loading}
-        className="w-full rounded-full bg-brand-600 px-7 py-3.5 font-bold text-white shadow-lg shadow-brand-600/25 transition-all hover:-translate-y-0.5 hover:bg-brand-700 disabled:translate-y-0 disabled:opacity-70"
+        className="lift-glow w-full rounded-full bg-brand-600 px-7 py-3.5 font-bold text-white shadow-lg shadow-brand-600/25 hover:bg-brand-700 disabled:translate-y-0 disabled:opacity-70"
       >
         {loading ? "Ingresando…" : "Ingresar"}
       </button>

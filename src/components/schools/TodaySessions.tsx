@@ -42,7 +42,7 @@ export function TodaySessions({ sessions }: { sessions: Session[] }) {
               type="button"
               aria-pressed={filter === option.value}
               onClick={() => setFilter(option.value)}
-              className={`rounded-full px-3 py-1.5 text-xs font-extrabold transition-colors ${
+              className={`rounded-full px-3 py-1.5 text-xs font-extrabold transition-transform hover:scale-105 ${
                 filter === option.value
                   ? "bg-brand-500 text-white"
                   : "bg-cream-100 text-brand-700 hover:bg-brand-100"

@@ -48,7 +48,7 @@ export function PanelTopbar({
           <button
             type="button"
             aria-label="Ver avisos (3 nuevos)"
-            className="relative grid size-11 place-items-center rounded-2xl bg-white text-brand-600 shadow-soft ring-1 ring-brand-100 transition-transform hover:-translate-y-0.5"
+            className="lift-glow relative grid size-11 place-items-center rounded-2xl bg-white text-brand-600 shadow-soft ring-1 ring-brand-100"
           >
             <svg
               viewBox="0 0 24 24"
@@ -67,7 +67,10 @@ export function PanelTopbar({
             </span>
           </button>
 
-          <div className="flex items-center gap-2 rounded-full bg-white py-1.5 pl-1.5 pr-4 shadow-soft ring-1 ring-brand-100">
+          <div
+            tabIndex={0}
+            className="lift-glow flex items-center gap-2 rounded-full bg-white py-1.5 pl-1.5 pr-4 shadow-soft ring-1 ring-brand-100"
+          >
             <span
               aria-hidden="true"
               className="grid size-9 place-items-center rounded-full bg-brand-100 text-sm font-extrabold text-brand-700"
