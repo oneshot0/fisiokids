@@ -14,6 +14,11 @@ const paths: Record<PanelSection["icon"], string> = {
   children:
     "M8 20v-1a3 3 0 0 1 6 0v1M11 15a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Zm6 5v-1a3 3 0 0 0-2.2-2.9M17 14a2 2 0 1 0 0-4",
   school: "M3 10 12 4l9 6M5 11v9h14v-9M9 20v-5h6v5",
+  calendar:
+    "M6 4v3m12-3v3M4 9h16M6 5h12a2 2 0 0 1 2 2v12H4V7a2 2 0 0 1 2-2Zm2 8h3m2 0h3m-8 4h3m2 0h3",
+  alert: "M12 4 21 20H3L12 4Zm0 6v4m0 3h.01",
+  chat: "M4 5h16v11H8l-4 4V5Zm4 5h.01m3.99 0h.01m3.99 0h.01",
+  check: "m5 12 4 4L19 6",
 };
 
 export function SchoolsIcon({

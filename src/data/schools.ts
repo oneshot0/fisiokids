@@ -51,7 +51,11 @@ export type PanelSection = {
     | "reports"
     | "users"
     | "children"
-    | "school";
+    | "school"
+    | "calendar"
+    | "alert"
+    | "chat"
+    | "check";
   description: string;
 };
 
