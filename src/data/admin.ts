@@ -16,6 +16,18 @@ export const adminSections: PanelSection[] = [
     description: "Administradores, terapeutas y apoderados",
   },
   {
+    href: "/schools/admin/sesiones",
+    label: "Sesiones",
+    icon: "calendar",
+    description: "Registro diario de terapias realizadas y canceladas",
+  },
+  {
+    href: "/schools/admin/incidentes",
+    label: "Incidentes y quejas",
+    icon: "alert",
+    description: "Bandeja de incidentes, quejas y recomendaciones",
+  },
+  {
     href: "/schools/admin/ninos",
     label: "Niños",
     icon: "children",
