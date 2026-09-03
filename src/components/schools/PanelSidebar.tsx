@@ -18,7 +18,7 @@ export function PanelSidebar({
   return (
     <aside
       id="panel-nav"
-      className="panel-sidebar fixed inset-y-0 left-0 z-40 flex flex-col gap-6 overflow-y-auto bg-brand-50 px-3 py-5 ring-1 ring-brand-100"
+      className="panel-sidebar fixed inset-y-0 left-0 z-40 flex flex-col gap-6 overflow-y-auto bg-brand-50 px-3 py-5 ring-1 ring-brand-100 lg:overflow-visible"
       aria-label="Menú del panel"
     >
       <button
@@ -70,6 +70,7 @@ export function PanelSidebar({
                   onClick={onClose}
                   aria-current={active ? "page" : undefined}
                   title={collapsed ? section.label : undefined}
+                  suppressHydrationWarning
                   className={`panel-nav-item animate-slide-in-left group flex items-center gap-3 rounded-2xl px-3 py-3 text-sm font-bold transition-colors ${
                     active
                       ? "bg-white text-brand-700 shadow-soft ring-1 ring-brand-200"
