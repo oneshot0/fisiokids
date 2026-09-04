@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PanelHeader } from "@/components/schools/PanelHeader";
 import { inputClass } from "@/components/schools/Field";
+import { DataSourceBadge, DataSourceNotice } from "@/components/schools/admin/DataSourceNotice";
+import { first, type SearchParams } from "@/lib/admin/query";
 import { adminSections } from "@/data/admin";
 import { roleLabels, type Role } from "@/data/users";
-import { DB_NOT_CONFIGURED_MESSAGE } from "@/lib/db/config";
 import { createUsersRepository, getUsersDataSource, type UserFilters } from "@/lib/users";
 
 const section = adminSections.find((item) => item.href.endsWith("/usuarios"))!;
@@ -21,11 +22,7 @@ const roleStyles: Record<Role, string> = {
   padre: "bg-butter-100 text-butter-600",
 };
 
-type SearchParams = Record<string, string | string[] | undefined>;
 
-function first(value: string | string[] | undefined): string | undefined {
-  return Array.isArray(value) ? value[0] : value;
-}
 
 function parseFilters(params: SearchParams): UserFilters {
   const role = first(params.rol);
@@ -67,18 +64,10 @@ export default async function AdminUsersPage({
       <PanelHeader
         title={section.label}
         subtitle={section.description}
-        action={
-          <span className="rounded-full bg-cream-100 px-3.5 py-1.5 text-xs font-bold text-brand-900/70 ring-1 ring-cream-200">
-            {source === "mock" ? "Datos de ejemplo (sin MySQL)" : "Conectado a MySQL"}
-          </span>
-        }
+        action={<DataSourceBadge source={source} />}
       />
 
-      {source === "mock" && (
-        <p className="animate-fade-up mb-6 rounded-2xl bg-butter-100 px-5 py-3 text-sm font-semibold text-butter-600 ring-1 ring-butter-200">
-          {DB_NOT_CONFIGURED_MESSAGE}
-        </p>
-      )}
+      <DataSourceNotice source={source} />
 
       <section className="animate-fade-up mb-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <StatCard label="Total" value={summary.total} />

@@ -3,6 +3,9 @@ import Link from "next/link";
 import { PanelHeader } from "@/components/schools/PanelHeader";
 import { inputClass } from "@/components/schools/Field";
 import { SchoolsIcon } from "@/components/schools/SchoolsIcon";
+import { DataSourceBadge, DataSourceNotice } from "@/components/schools/admin/DataSourceNotice";
+import { formatShortDate } from "@/lib/admin/format";
+import { first, type SearchParams } from "@/lib/admin/query";
 import { adminSections } from "@/data/admin";
 import {
   incidentKindLabels,
@@ -14,7 +17,6 @@ import {
   type IncidentStatus,
 } from "@/data/incidents";
 import { students } from "@/data/students";
-import { DB_NOT_CONFIGURED_MESSAGE } from "@/lib/db/config";
 import {
   createIncidentsRepository,
   getIncidentsDataSource,
@@ -56,11 +58,7 @@ const priorityDot: Record<Incident["priority"], string> = {
   baja: "bg-brand-400",
 };
 
-type SearchParams = Record<string, string | string[] | undefined>;
 
-function first(value: string | string[] | undefined): string | undefined {
-  return Array.isArray(value) ? value[0] : value;
-}
 
 function pick<T extends string>(options: readonly T[], value: string | undefined): T | undefined {
   return options.includes(value as T) ? (value as T) : undefined;
@@ -88,9 +86,6 @@ function buildHref(filters: IncidentFilters, patch: Partial<IncidentFilters>): s
   return qs ? `${section.href}?${qs}` : section.href;
 }
 
-function formatDate(date: string): string {
-  return `${date.slice(8, 10)}/${date.slice(5, 7)}/${date.slice(0, 4)}`;
-}
 
 export default async function AdminIncidentsPage({
   searchParams,
@@ -150,18 +145,10 @@ export default async function AdminIncidentsPage({
       <PanelHeader
         title={section.label}
         subtitle={section.description}
-        action={
-          <span className="rounded-full bg-cream-100 px-3.5 py-1.5 text-xs font-bold text-brand-900/70 ring-1 ring-cream-200">
-            {source === "mock" ? "Datos de ejemplo (sin MySQL)" : "Conectado a MySQL"}
-          </span>
-        }
+        action={<DataSourceBadge source={source} />}
       />
 
-      {source === "mock" && (
-        <p className="animate-fade-up mb-6 rounded-2xl bg-butter-100 px-5 py-3 text-sm font-semibold text-butter-600 ring-1 ring-butter-200">
-          {DB_NOT_CONFIGURED_MESSAGE}
-        </p>
-      )}
+      <DataSourceNotice source={source} />
 
       <ul className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         {stats.map((stat, index) => (
@@ -318,7 +305,7 @@ export default async function AdminIncidentsPage({
                         </>
                       )}
                     </span>
-                    <time dateTime={incident.date}>{formatDate(incident.date)}</time>
+                    <time dateTime={incident.date}>{formatShortDate(incident.date)}</time>
                   </div>
                 </li>
               );
