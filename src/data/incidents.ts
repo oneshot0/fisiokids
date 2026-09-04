@@ -20,6 +20,12 @@ export const incidentKindLabels: Record<IncidentKind, string> = {
   recomendacion: "Recomendación",
 };
 
+export const incidentKindPluralLabels: Record<IncidentKind, string> = {
+  incidente: "Incidentes",
+  queja: "Quejas",
+  recomendacion: "Recomendaciones",
+};
+
 export const incidentStatusLabels: Record<IncidentStatus, string> = {
   nueva: "Nueva",
   en_revision: "En revisión",

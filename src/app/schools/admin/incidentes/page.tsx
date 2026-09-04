@@ -6,6 +6,7 @@ import { SchoolsIcon } from "@/components/schools/SchoolsIcon";
 import { adminSections } from "@/data/admin";
 import {
   incidentKindLabels,
+  incidentKindPluralLabels,
   incidentStatusLabels,
   priorityLabels,
   type Incident,
@@ -195,7 +196,7 @@ export default async function AdminIncidentsPage({
                 href={buildHref(filters, { kind })}
                 className={`${chipBase} ${filters.kind === kind ? chipOn : chipOff}`}
               >
-                {incidentKindLabels[kind]}s ({summary.byKind[kind]})
+                {incidentKindPluralLabels[kind]} ({summary.byKind[kind]})
               </Link>
             ))}
           </div>
