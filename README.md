@@ -1,5 +1,18 @@
 # FisioKids
 
+## Agenda, evaluaciones y colegios
+
+La primera versión funcional usa PostgreSQL, Prisma y Auth.js. Copia
+`.env.example` a `.env`, inicia `docker compose up -d db`, ejecuta
+`npx prisma migrate deploy`, `npm run prisma:seed` y luego `npm run dev`.
+
+Las credenciales demo del seed son `tutor.demo@fisiokids.test`,
+`terapeuta.demo@fisiokids.test` y `admin.demo@fisiokids.test`, con contraseña
+`Demo-FisioKids-2026!`. Son datos ficticios y deben reemplazarse en cualquier
+entorno compartido.
+
+Validación local: `npm run lint`, `npm run test` y `npx tsc --noEmit`.
+
 Sitio web del centro de terapias pediátricas FisioKids (Lima, Perú): landing pública,
 agenda de citas y, más adelante, portal de padres y el módulo FisioKids Schools.
 

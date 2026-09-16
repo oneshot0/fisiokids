@@ -53,3 +53,14 @@ confirmar una sola respuesta exitosa.
 
 Los contratos HTTP están en `contracts/` y las reglas de persistencia en
 `data-model.md`.
+# Quickstart implementado
+
+1. Copia `.env.example` a `.env`.
+2. Ejecuta `docker compose up -d db`.
+3. Ejecuta `npx prisma migrate deploy` y `npm run prisma:seed`.
+4. Inicia con `npm run dev`.
+5. Comprueba `npm run lint`, `npm run test` y `npx tsc --noEmit`.
+
+Si PostgreSQL o los navegadores de Playwright no están disponibles, las pruebas
+unitarias y el typecheck siguen siendo ejecutables; las pruebas de integración
+deben ejecutarse al disponer de la base de datos.

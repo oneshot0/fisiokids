@@ -1,0 +1,19 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: fisiokids
+      POSTGRES_PASSWORD: fisiokids
+      POSTGRES_DB: fisiokids
+    ports:
+      - "5432:5432"
+    volumes:
+      - fisiokids-postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U fisiokids -d fisiokids"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  fisiokids-postgres:
