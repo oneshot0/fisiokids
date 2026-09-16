@@ -4,7 +4,15 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react()],
-  resolve: { alias: { "@": path.resolve(__dirname, "src") } },
+  resolve: {
+    alias: {
+      "@/components": path.resolve(__dirname, "frontend/components"),
+      "@/data": path.resolve(__dirname, "frontend/data"),
+      "@/lib": path.resolve(__dirname, "backend/lib"),
+      "@/types": path.resolve(__dirname, "backend/types"),
+      "@": path.resolve(__dirname, "src"),
+    },
+  },
   test: {
     environment: "node",
     globals: true,

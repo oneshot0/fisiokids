@@ -53,22 +53,31 @@ src/
       page.tsx            landing de la plataforma
       login/ registro/    acceso de apoderados (maqueta sin backend)
       panel/              informes, blog, tips, juegos, pagos
+frontend/
   components/
     Navbar, Footer, Logo, Turtle (mascota Tuki), WhatsAppButton
     sections/             bloques de la landing pública
     schools/              header, sidebar, mockup y formularios de Schools
   data/                   terapias, novedades y datos de Schools (editable)
-  lib/site.ts             datos de contacto y navegación
+
+backend/
+  lib/                    autenticación, autorización, citas, evaluaciones y validaciones
+  types/                  declaraciones compartidas del servidor
+
+BD/
+  prisma/                 esquema, migraciones y seed de PostgreSQL
 ```
 
-Las dos partes viven en el mismo proyecto pero no comparten layout: el sitio público
-usa el route group `(site)` y FisioKids Schools tiene el suyo en `src/app/schools`.
+`src/app` se conserva en la raíz porque Next.js detecta allí automáticamente las rutas
+App Router y los Route Handlers. El código visual reutilizable vive en `frontend`,
+la lógica de servidor en `backend` y la persistencia en `BD`.
 
-Para cambiar teléfono, dirección, correo o WhatsApp: `src/lib/site.ts`.
-Para editar terapias o novedades: `src/data/`.
+Para cambiar teléfono, dirección, correo o WhatsApp: `frontend/data` y
+`backend/lib/site.ts`.
+Para editar terapias o novedades: `frontend/data/`.
 
 ## Marca
 
 - Colores: blanco + verde (`--color-brand-*` en `src/app/globals.css`)
 - Tipografía: Nunito
-- Mascota: Tuki, la tortuga (`src/components/Turtle.tsx`, SVG puro)
+- Mascota: Tuki, la tortuga (`frontend/components/Turtle.tsx`, SVG puro)

@@ -270,3 +270,14 @@ Tarea T053: Servicio de DTO allowlistado escolar en src/lib/schools/students.ts
 - Todos los seeds, fixtures, pruebas, capturas y ejemplos de documentación deben usar datos ficticios o anonimizados.
 - Ninguna tarea añade pagos, notificaciones externas, historia clínica completa, diagnóstico automático u otra funcionalidad fuera del alcance del MVP.
 
+## Phase 9: Convergence
+
+- [ ] T062 Añadir restricciones PostgreSQL de exclusión por rangos para terapeuta y sala, integrar sus conflictos con la creación y reprogramación transaccional, y cubrir 100 reservas concurrentes por bloque conforme a Constitution III / SC-004 / FR-013 (missing)
+- [ ] T063 Completar la disponibilidad y reserva autenticadas con conversión explícita a `America/Lima`, validación de fechas y disponibilidad del terapeuta, bloques exactos y estados visuales conforme a FR-007–FR-012 / US1/AC1-AC4 / SC-003 (partial)
+- [ ] T064 Completar el ciclo de vida de citas con filtros por rol, cancelación y reprogramación timezone-safe, auditoría y respuestas semánticas para estados y recursos inexistentes conforme a FR-015–FR-018 / US2/AC1-AC5 / SC-006 (partial)
+- [ ] T065 Validar y autorizar cada actualización de evaluación, implementar versionado transaccional con una sola revisión activa, completar la visibilidad explícita para tutores y añadir la UI y cobertura previstas conforme a FR-019–FR-022 / US3/AC1-AC3 / SC-007 (partial)
+- [ ] T066 Aplicar protección server-side y mapeo seguro de errores `401/403/404/409/422/500` en todos los handlers y layouts privados, incluyendo el panel escolar, conforme a FR-003–FR-004 / FR-027–FR-028 / US5/AC1-AC3 / SC-001-002 (partial)
+- [ ] T067 Completar el acceso escolar protegido, los estados vacíos/error respetuosos de la privacidad y los contratos de error de las mutaciones de membresías y asociaciones conforme a FR-023–FR-026 / US4/AC1-AC4 / SC-008 (partial)
+- [ ] T068 Crear las pruebas de contrato, integración, autenticación, auditoría, privacidad escolar, concurrencia, ciclo de vida, versionado y E2E faltantes para ejecutar los criterios medibles conforme a plan: testing strategy / SC-001–SC-008 / SC-011 (missing)
+- [ ] T069 Conectar eventos de auditoría redactados a lecturas y mutaciones sensibles y verificar que no registren tokens, datos clínicos ni identificadores innecesarios conforme a plan: audit and traceability / FR-027 (missing)
+- [ ] T070 Revisar, retirar o proteger explícitamente las superficies de pagos, informes, blog, juegos, tips e incidentes que exceden el MVP conforme a Constitution I / plan: MVP scope (unrequested)
