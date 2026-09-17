@@ -1,0 +1,2 @@
+import { PageHeader } from "@/components/PageHeader";
+export default function EvaluationsPage() { return <><PageHeader eyebrow="Evaluaciones" title="Evaluaciones profesionales" subtitle="Consulta los registros que tienes autorizados." /><main className="mx-auto max-w-5xl px-6 pb-20"><p className="rounded-2xl bg-brand-50 p-6 text-brand-800">Los datos clínicos solo están disponibles para profesionales, administradores y tutores habilitados explícitamente.</p></main></>; }
