@@ -17,6 +17,7 @@
 - Q: ¿Qué zona horaria debe usar el centro para interpretar fechas, horas de citas y la regla de cancelación de 24 horas? → A: `America/Lima`
 - Q: ¿Los tutores deben poder consultar evaluaciones profesionales en algún caso dentro de esta versión? → A: Sí, si el administrador habilita al tutor explícitamente
 - Q: ¿Cómo debe cambiar el estado de una evaluación cuando un profesional registra una nueva versión? → A: Transición lineal: `draft → active → superseded`
+- Q: Cuando el tutor consulta la fecha de hoy, ¿desde qué hora deben comenzar a mostrarse los bloques disponibles hasta las 22:00? → A: Desde la siguiente hora exacta posterior a la hora actual.
 
 ## User Scenarios & Testing
 
@@ -36,8 +37,11 @@ aparezca en el panel del tutor sin permitir una segunda reserva superpuesta.
 **Acceptance Scenarios**:
 
 1. **Given** un tutor autenticado con un niño asociado, **When** consulta una fecha
-   presente o futura, **Then** solo se muestran bloques de 60 minutos entre las
-   12:00 y las 22:00, iniciados en horas exactas.
+   presente o futura, **Then** para el día actual solo se muestran bloques de 60
+   minutos cuyo inicio sea posterior a la hora actual de `America/Lima`, redondeado
+   a la siguiente hora exacta, hasta las 22:00; para días futuros se muestran los
+   bloques disponibles completos entre las 12:00 y las 22:00, iniciados en horas
+   exactas.
 2. **Given** un bloque disponible y un terapeuta asignable, **When** el tutor confirma
    la reserva, **Then** se crea una cita con estado `scheduled`, duración de 60
    minutos y atención directa de 45 minutos.
@@ -160,6 +164,9 @@ para cada combinación.
 
 - La fecha seleccionada puede ser la fecha actual, pero un bloque cuya hora ya pasó
   no debe aparecer como disponible.
+- Para la fecha actual, si son las 18:00, los únicos inicios que pueden mostrarse
+  son 19:00, 20:00 y 21:00; nunca se muestra el bloque de la hora actual ni uno
+  anterior.
 - Una fecha anterior a la actual no puede mostrar bloques reservables.
 - Los bloques deben terminar como máximo a las 22:00; el último comienza a las 21:00.
 - Un inicio en 12:30 o cualquier minuto distinto de `00` no es reservable.
@@ -191,9 +198,13 @@ para cada combinación.
 - **FR-006**: El sistema MUST permitir al administrador asociar explícitamente un
   niño con un colegio y modificar o eliminar esa asociación.
 - **FR-007**: El sistema MUST permitir consultar disponibilidad para fechas presentes
-  o futuras en bloques de 60 minutos entre las 12:00 y las 22:00.
+  o futuras en bloques de 60 minutos entre las 12:00 y las 22:00; para la fecha
+  actual, solo debe mostrar inicios posteriores a la hora actual de `America/Lima`,
+  redondeados a la siguiente hora exacta.
 - **FR-008**: El sistema MUST ofrecer únicamente inicios en horas exactas y no
-  ofrecer bloques pasados, anteriores a las 12:00 o posteriores a las 22:00.
+  ofrecer bloques pasados, el bloque correspondiente a la hora actual, horarios
+  anteriores a las 12:00 o posteriores a las 21:00 como inicio; los días futuros
+  deben mostrar el rango completo permitido hasta terminar a las 22:00.
 - **FR-009**: El sistema MUST distinguir visualmente bloques disponibles, no
   disponibles y reservados sin exponer los motivos sensibles de indisponibilidad.
 - **FR-010**: El sistema MUST crear una cita solo para un niño autorizado para el

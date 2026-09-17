@@ -241,4 +241,19 @@ ALTER TABLE "ProfessionalEvaluation" ADD CONSTRAINT "ProfessionalEvaluation_ther
 -- AddForeignKey
 ALTER TABLE "AuditLog" ADD CONSTRAINT "AuditLog_actorUserId_fkey" FOREIGN KEY ("actorUserId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
+ALTER TABLE "Appointment"
+  ADD CONSTRAINT "Appointment_therapist_no_overlap"
+  EXCLUDE USING gist (
+    "therapistId" WITH =,
+    tstzrange("startsAt", "endsAt", '[)') WITH &&
+  )
+  WHERE ("status" <> 'cancelled');
+
+ALTER TABLE "Appointment"
+  ADD CONSTRAINT "Appointment_room_no_overlap"
+  EXCLUDE USING gist (
+    "roomId" WITH =,
+    tstzrange("startsAt", "endsAt", '[)') WITH &&
+  )
+  WHERE ("roomId" IS NOT NULL AND "status" <> 'cancelled');
 

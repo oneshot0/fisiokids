@@ -97,8 +97,9 @@ src/
     ├── db/
     └── validation/
 
-prisma/
+BD/prisma/
 ├── schema.prisma
+├── seed.ts
 └── migrations/
 
 tests/
@@ -110,7 +111,7 @@ tests/
 **Structure Decision**: Aplicación web única. Las rutas públicas y privadas
 permanecen en `src/app`; los Route Handlers delegan validación, autorización y
 transacciones a módulos pequeños de `src/lib`. Prisma y migraciones viven en
-`prisma/`; las pruebas se separan por dominio, integración y contrato sin crear
+`BD/prisma/`; las pruebas se separan por dominio, integración y contrato sin crear
 un backend independiente.
 
 ## Complexity Tracking

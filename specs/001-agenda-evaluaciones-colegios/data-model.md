@@ -47,6 +47,9 @@
 
 - `id`, `therapistId`, `weekday`, `startMinute`, `endMinute`, `active`.
 - Se interpreta en `America/Lima` para generar slots.
+- Para la fecha actual, solo se generan slots cuyo inicio sea posterior a la hora
+  actual y esté redondeado a la siguiente hora exacta; para fechas futuras se
+  genera todo el rango configurado entre 12:00 y 21:00.
 
 ### Room
 
@@ -82,7 +85,8 @@
 - Colisión activa:
   `newStart < existingEnd AND newEnd > existingStart`, por terapeuta y sala.
 - La base de datos refuerza exclusión de rangos para estados no `cancelled`; la
-  aplicación traduce la violación a `409 Conflict`.
+  migración debe habilitar `btree_gist` y declarar la exclusión parcial por
+  terapeuta y sala. La aplicación traduce la violación a `409 Conflict`.
 - `tutorVisible` solo lo habilita un administrador y no amplía permisos de
   colegio.
 - `scheduled -> completed` o `scheduled -> cancelled`; citas `completed` y

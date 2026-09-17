@@ -11,4 +11,8 @@ describe("appointment slots", () => {
     const now = new Date("2030-01-02T15:30:00");
     expect(generateSlots(new Date("2030-01-02T00:00:00"), now).every(s => s.startsAt > now)).toBe(true);
   });
+  it("starts today at the next exact hour", () => {
+    const slots = generateSlots(new Date("2030-01-02T00:00:00"), new Date("2030-01-02T18:00:00"));
+    expect(slots.map((slot) => slot.startsAt.getHours())).toEqual([19, 20, 21]);
+  });
 });

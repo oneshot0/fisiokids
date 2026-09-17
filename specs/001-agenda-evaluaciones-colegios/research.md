@@ -40,7 +40,9 @@
 
 - **Decisión**: Interpretar fechas y regla de 24 horas en `America/Lima`;
   persistir instantes consistentemente y calcular slots exactos de una hora
-  entre 12:00 y 21:00. Validar en servicio y reforzar en PostgreSQL mediante
+  entre 12:00 y 21:00. Para la fecha actual, excluir la hora actual y todas las
+  anteriores, comenzando en la siguiente hora exacta; para fechas futuras,
+  mostrar el rango completo. Validar en servicio y reforzar en PostgreSQL mediante
   exclusión parcial con `tstzrange` para terapeuta y sala opcional, excluyendo
   citas `cancelled`.
 - **Racional**: La consulta previa mejora UX, pero solo una restricción de base

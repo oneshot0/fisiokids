@@ -9,6 +9,10 @@ instantes se serializan en ISO 8601. Los errores usan
 - Roles: `tutor`, `terapeuta`, `administrador`.
 - El tutor recibe disponibilidad de sus niños; el servidor resuelve terapeuta
   entre asignaciones válidas.
+- Para la fecha actual, `slots` solo incluye inicios posteriores a la hora actual
+  de `America/Lima`, redondeados a la siguiente hora exacta. Por ejemplo, a las
+  18:00 solo puede devolver 19:00, 20:00 y 21:00. Para fechas futuras devuelve el
+  rango completo de 12:00 a 21:00.
 - `200`: `{ date, timezone, slots: [{ startsAt, endsAt, state }] }`.
 - `state`: `available | unavailable | reserved`.
 - `400` fecha inválida/pasada; `401` sin sesión; `403` sin rol.

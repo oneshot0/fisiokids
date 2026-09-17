@@ -28,7 +28,9 @@ npm run test:integration
 ```
 
 Cubrir generación de slots, límites 12:00/22:00, zona `America/Lima`, regla de
-24 horas, estados de evaluación y autorización por relación. Las pruebas de
+visibilidad del día actual (a las 18:00 solo 19:00, 20:00 y 21:00), rango
+completo para días futuros, regla de 24 horas, estados de evaluación y
+autorización por relación. Las pruebas de
 integración deben ejecutar dos reservas concurrentes para el mismo bloque y
 confirmar una sola respuesta exitosa.
 
