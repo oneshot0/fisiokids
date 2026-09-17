@@ -1,0 +1,187 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  tutor
+  terapeuta
+  colegio
+  administrador
+}
+enum AppointmentStatus {
+  scheduled
+  completed
+  cancelled
+}
+enum EvaluationStatus {
+  draft
+  active
+  superseded
+}
+
+model User {
+  id String @id @default(cuid())
+  email String @unique
+  passwordHash String
+  role Role
+  active Boolean @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  tutorProfile TutorProfile?
+  therapistProfile TherapistProfile?
+  memberships SchoolMembership[]
+  auditLogs AuditLog[]
+}
+
+model TutorProfile {
+  id String @id @default(cuid())
+  userId String @unique
+  displayName String
+  phone String?
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  children ChildTutor[]
+  appointments Appointment[]
+}
+
+model TherapistProfile {
+  id String @id @default(cuid())
+  userId String @unique
+  displayName String
+  active Boolean @default(true)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  children ChildTherapist[]
+  availability Availability[]
+  appointments Appointment[]
+  evaluations ProfessionalEvaluation[]
+}
+
+model School {
+  id String @id @default(cuid())
+  name String
+  active Boolean @default(true)
+  memberships SchoolMembership[]
+  children ChildSchool[]
+}
+
+model SchoolMembership {
+  userId String
+  schoolId String
+  active Boolean @default(true)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  school School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  @@id([userId, schoolId])
+}
+
+model Child {
+  id String @id @default(cuid())
+  firstName String
+  lastName String
+  birthDate DateTime
+  operationalStatus String @default("active")
+  tutorLinks ChildTutor[]
+  therapistLinks ChildTherapist[]
+  schoolLinks ChildSchool[]
+  appointments Appointment[]
+  evaluations ProfessionalEvaluation[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ChildTutor {
+  childId String
+  tutorId String
+  isPrimary Boolean @default(false)
+  child Child @relation(fields: [childId], references: [id], onDelete: Cascade)
+  tutor TutorProfile @relation(fields: [tutorId], references: [id], onDelete: Cascade)
+  @@id([childId, tutorId])
+}
+
+model ChildTherapist {
+  childId String
+  therapistId String
+  active Boolean @default(true)
+  child Child @relation(fields: [childId], references: [id], onDelete: Cascade)
+  therapist TherapistProfile @relation(fields: [therapistId], references: [id], onDelete: Cascade)
+  @@id([childId, therapistId])
+}
+
+model ChildSchool {
+  childId String
+  schoolId String
+  active Boolean @default(true)
+  linkedAt DateTime @default(now())
+  child Child @relation(fields: [childId], references: [id], onDelete: Cascade)
+  school School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  @@id([childId, schoolId])
+}
+
+model Availability {
+  id String @id @default(cuid())
+  therapistId String
+  weekday Int
+  startMinute Int
+  endMinute Int
+  active Boolean @default(true)
+  therapist TherapistProfile @relation(fields: [therapistId], references: [id], onDelete: Cascade)
+}
+
+model Room {
+  id String @id @default(cuid())
+  name String
+  active Boolean @default(true)
+  appointments Appointment[]
+}
+
+model Appointment {
+  id String @id @default(cuid())
+  childId String
+  tutorId String
+  therapistId String
+  roomId String?
+  startsAt DateTime
+  endsAt DateTime
+  directMinutes Int @default(45)
+  operationalMinutes Int @default(15)
+  status AppointmentStatus @default(scheduled)
+  cancelledAt DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  child Child @relation(fields: [childId], references: [id])
+  tutor TutorProfile @relation(fields: [tutorId], references: [id])
+  therapist TherapistProfile @relation(fields: [therapistId], references: [id])
+  room Room? @relation(fields: [roomId], references: [id])
+  @@index([therapistId, startsAt])
+  @@index([roomId, startsAt])
+}
+
+model ProfessionalEvaluation {
+  id String @id @default(cuid())
+  childId String
+  therapistId String
+  recordedAt DateTime
+  teaLevel Int
+  status EvaluationStatus @default(draft)
+  revision Int @default(1)
+  tutorVisible Boolean @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  child Child @relation(fields: [childId], references: [id])
+  therapist TherapistProfile @relation(fields: [therapistId], references: [id])
+  @@index([childId, status])
+}
+
+model AuditLog {
+  id String @id @default(cuid())
+  actorUserId String
+  action String
+  entity String
+  entityId String
+  metadataRedacted Json?
+  createdAt DateTime @default(now())
+  actor User @relation(fields: [actorUserId], references: [id])
+}

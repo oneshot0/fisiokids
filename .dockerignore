@@ -1,0 +1,12 @@
+node_modules/
+.git/
+.next/
+out/
+coverage/
+test-results/
+*.log
+.env*
+!.env.example
+Dockerfile*
+.dockerignore
+BD/prisma/migrations/

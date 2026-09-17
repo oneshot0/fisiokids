@@ -1,0 +1,4 @@
+import { NextResponse } from "next/server";
+import { requireSession, responseError } from "@/lib/authorization/session";
+import { cancelAppointment } from "@/lib/appointments/cancel";
+export async function POST(_: Request, { params }: { params: Promise<{ id: string }> }) { try { const s = await requireSession(); const { id } = await params; return NextResponse.json(await cancelAppointment(id, s.user.id, s.user.role)); } catch (e) { if (e instanceof Error && e.message === "TOO_LATE") return NextResponse.json({ code: "TOO_LATE", message: "Las cancelaciones requieren al menos 24 horas de anticipación. Comunícate con el centro si necesitas ayuda." }, { status: 422 }); if (e instanceof Error && e.message === "FORBIDDEN") return NextResponse.json({ code: "FORBIDDEN", message: "No tienes permisos para esta operación." }, { status: 403 }); return responseError(e); } }
